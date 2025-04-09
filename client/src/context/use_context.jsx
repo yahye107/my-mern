@@ -53,7 +53,6 @@ export const UserProvider = ({ children }) => {
           navigate("/auth");
         }
       } finally {
-        setIsLoading(false);
       }
     };
 

@@ -193,10 +193,112 @@ const deleteUsersbyId = async (req, res) => {
     console.log("the deleting ha been failed", error);
   }
 };
+const changePassword = async (req, res) => {
+  try {
+    const userId = req.userInfo._id;
+    const { oldPassword, newPassword } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Old password is incorrect",
+      });
+    }
+
+    const newHashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = newHashedPassword;
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while changing the password",
+    });
+  }
+};
+const changeEmail = async (req, res) => {
+  try {
+    const user = await User.findById(req.userInfo._id);
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isMatch)
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid password" });
+
+    const emailExists = await User.findOne({ email: req.body.email });
+    if (emailExists)
+      return res
+        .status(400)
+        .json({ success: false, message: "Email already in use" });
+
+    user.email = req.body.email;
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Email updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+const changeUsername = async (req, res) => {
+  try {
+    const user = await User.findById(req.userInfo._id);
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isMatch)
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid password" });
+
+    const usernameExists = await User.findOne({ username: req.body.username });
+    if (usernameExists)
+      return res
+        .status(400)
+        .json({ success: false, message: "Username already taken" });
+
+    user.username = req.body.username;
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Username updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
 module.exports = {
   registerUser,
   loginUser,
   logout,
   getallUsers,
   deleteUsersbyId,
+  changeEmail,
+  changeUsername,
+  changePassword,
 };

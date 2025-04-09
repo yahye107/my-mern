@@ -107,9 +107,54 @@ const ManageQoute = () => {
                       {quote?.userId?.email}
                     </div>
                   </td>
-                  <td className="px-4 py-3">{quote.subject}</td>
+                  <td className="px-4 py-3 max-w-[200px] truncate text-ellipsis overflow-hidden whitespace-nowrap">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="text-left p-0 h-auto font-normal hover:bg-transparent"
+                        >
+                          <div className="line-clamp-2 text-gray-300 hover:text-blue-400 transition-colors cursor-pointer">
+                            {quote.subject}
+                          </div>
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl bg-gray-900 text-gray-100">
+                        <DialogHeader>
+                          <DialogTitle>Full subject</DialogTitle>
+                        </DialogHeader>
+
+                        {/* ✅ Key: use whitespace-pre-line for actual \n line breaks */}
+                        <div className="p-4 bg-gray-800 rounded-lg whitespace-pre-line break-words max-h-[60vh] overflow-y-auto">
+                          {quote.subject}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </td>
+
                   <td className="px-4 py-3 max-w-xs truncate">
-                    {quote.description}
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="text-left p-0 h-auto font-normal hover:bg-transparent"
+                        >
+                          <div className="line-clamp-2 text-gray-300 hover:text-blue-400 transition-colors cursor-pointer">
+                            {quote.description}
+                          </div>
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl bg-gray-900 text-gray-100">
+                        <DialogHeader>
+                          <DialogTitle>Full Description</DialogTitle>
+                        </DialogHeader>
+
+                        {/* ✅ Key: use whitespace-pre-line for actual \n line breaks */}
+                        <div className="p-4 bg-gray-800 rounded-lg whitespace-pre-line break-words max-h-[60vh] overflow-y-auto">
+                          {quote.description}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </td>
                   <td className="px-4 py-3">
                     <span

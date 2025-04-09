@@ -136,12 +136,14 @@ const AuthPage = () => {
           {/* Mobile Header */}
           <div className="lg:hidden text-center space-y-6 mb-12">
             <img
-              src="/images/logo-dark.png"
+              src="/images/client.jpg"
               alt="Company Logo"
-              width={160}
-              height={48}
-              className="mx-auto"
+              // width={20}
+              // height={20}
+              // className="mx-auto rounded-full object-cover border-2  border-emerald-500"
+              className="w-20 h-20 mx-auto rounded-full object-cover border-2  border-emerald-500"
             />
+
             <h1 className="text-3xl font-bold text-slate-900">
               {isLoginView ? "Welcome Back" : "Get Started"}
             </h1>

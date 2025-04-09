@@ -95,14 +95,22 @@ const MainHeader = () => {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="block py-3 text-gray-300 hover:text-white border-b border-zinc-800"
+                  onClick={() => setIsMenuOpen(false)} // 👈 closes menu on click
+                  className="block py-3 text-center text-gray-300 hover:text-white border-b border-zinc-800"
                 >
-                  {item}
+                  {item.label}
                 </motion.a>
               ))}
-              <button className="w-full mt-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-lg">
-                Get Started
-              </button>
+              <Link
+                to="/auth"
+                onClick={() => setIsMenuOpen(false)}
+                smooth
+                duration={500}
+              >
+                <button className="w-full mt-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-lg text-center">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -138,21 +146,24 @@ const MainHeader = () => {
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 px-8 py-4 rounded-full text-lg text-white flex items-center gap-2"
-            >
-              Start Free Trial <Rocket className="w-5 h-5" />
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-full text-lg border border-indigo-500/30 hover:border-indigo-400 text-indigo-400 hover:text-white bg-indigo-500/10 hover:bg-indigo-500/20"
-            >
-              Watch Demo
-            </motion.button>
+            <Link to="/auth" smooth duration={500}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 px-8 py-4 rounded-full text-lg text-white flex items-center gap-2"
+              >
+                Start Free Trial <Rocket className="w-5 h-5" />
+              </motion.button>
+            </Link>
+            <Link to="/auth" smooth duration={500}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-full text-lg border border-indigo-500/30 hover:border-indigo-400 text-indigo-400 hover:text-white bg-indigo-500/10 hover:bg-indigo-500/20"
+              >
+                Register
+              </motion.button>
+            </Link>
           </div>
 
           {/* Stats Section */}

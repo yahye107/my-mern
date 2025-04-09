@@ -121,3 +121,60 @@ export const callRespondToQuoteApi = async (quoteId, response) => {
     return { success: false };
   }
 };
+
+//change password
+
+export const callChangePasswordApi = async (formData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/auth/change-password",
+      formData,
+      { withCredentials: true } // to ensure the cookie is sent with the request
+    );
+    return response.data;
+  } catch (error) {
+    return (
+      error.response?.data || {
+        success: false,
+        message: "Something went wrong",
+      }
+    );
+  }
+};
+
+// Add to your API service file
+export const callChangeEmailApi = async (formData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/auth/change-email",
+      formData,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    return (
+      error.response?.data || {
+        success: false,
+        message: "Something went wrong",
+      }
+    );
+  }
+};
+
+export const callChangeUsernameApi = async (formData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/auth/change-username",
+      formData,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    return (
+      error.response?.data || {
+        success: false,
+        message: "Something went wrong",
+      }
+    );
+  }
+};

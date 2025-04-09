@@ -6,6 +6,10 @@ const {
   loginUser,
   logout,
   deleteUsersbyId,
+  changeUsername,
+  changeEmail,
+  changePassword,
+
   getallUsers, // added new route to get all users
 } = require("../controlls/auth_controller");
 
@@ -16,12 +20,14 @@ routes.post("/login", loginUser);
 routes.get("/auth", authVarfication, (req, res) => {
   res.json({
     success: true,
-    user: req.user, // thanks to authVarfication
+    userInfo: req.userInfo,
     message: "welcom to home page",
   });
 });
 routes.delete("/delete/:id", deleteUsersbyId);
 routes.get("/get", getallUsers);
 routes.post("/logout", logout);
-
+routes.post("/change-password", authVarfication, changePassword);
+routes.post("/change-email", authVarfication, changeEmail);
+routes.post("/change-username", authVarfication, changeUsername);
 module.exports = routes;

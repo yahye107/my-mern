@@ -20,10 +20,11 @@ const authVarfication = async (req, res, next) => {
         message: "Unauthorized access",
       });
     }
-    return res.status(200).json({
-      success: true,
-      userInfo,
-    });
+    // return res.status(200).json({
+    //   success: true,
+    //   userInfo,
+    // });
+    req.userInfo = userInfo;
     // Attach user to request
     // req.user = userInfo;
     next(); // ✅ move to next middleware/route

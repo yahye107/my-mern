@@ -122,7 +122,7 @@ const CreateQuote = () => {
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <h2 className="text-3xl font-bold text-white tracking-tight m-10">
-            Your Quotes
+            Your Quotes Histroy
           </h2>
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
@@ -133,16 +133,25 @@ const CreateQuote = () => {
                 + Create New Quote
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-gray-900/95 backdrop-blur-xl text-white border border-gray-700 rounded-xl sm:max-w-lg shadow-lg max-h-[90vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle>Create New Quote</DialogTitle>
-                <DialogDescription>
-                  Fill out the form below to create a service quote
+            <DialogContent className="bg-gray-900/95 backdrop-blur-xl text-white border border-gray-700 rounded-2xl sm:max-w-xl shadow-2xl max-h-[90vh] overflow-y-auto px-6 py-8">
+              <DialogHeader className="mb-6 text-center space-y-1">
+                <DialogTitle className="text-2xl font-semibold">
+                  Create New Quote
+                </DialogTitle>
+                <DialogDescription className="text-gray-400 text-sm">
+                  Fill out the form below to request service assistance
                 </DialogDescription>
               </DialogHeader>
+
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-3">
-                  <Label htmlFor="subject">Subject</Label>
+                {/* Subject Field */}
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="subject"
+                    className="text-sm font-medium text-gray-300"
+                  >
+                    Subject
+                  </Label>
                   <Input
                     id="subject"
                     value={formData.subject}
@@ -151,36 +160,59 @@ const CreateQuote = () => {
                     }
                     required
                     placeholder="Enter subject"
-                    className="bg-gray-800 text-white placeholder-gray-500 border-gray-700 focus:border-emerald-500 focus:ring-emerald-500"
+                    className="bg-gray-800 text-white placeholder-gray-500 border border-gray-700 focus:border-emerald-500 focus:ring-emerald-500 rounded-lg px-4 py-2"
                   />
                 </div>
-                <div className="space-y-3">
-                  <Label htmlFor="priority">Priority</Label>
+
+                {/* Priority Field */}
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="priority"
+                    className="text-sm font-medium text-gray-300"
+                  >
+                    Priority
+                  </Label>
                   <Select
                     value={formData.priority}
                     onValueChange={(value) =>
                       setFormData({ ...formData, priority: value })
                     }
                   >
-                    <SelectTrigger className="bg-gray-800 text-white border-gray-700 focus:ring-emerald-500">
+                    <SelectTrigger className="bg-gray-800 text-white border border-gray-700 focus:ring-emerald-500 rounded-lg px-4 py-2">
                       <SelectValue placeholder="Select priority" />
                     </SelectTrigger>
-                    <SelectContent className="bg-gray-800 border-gray-700 text-white">
-                      <SelectItem value="High" className="hover:bg-gray-700">
+                    <SelectContent className="bg-gray-800 border border-gray-700 text-white rounded-md">
+                      <SelectItem
+                        value="High"
+                        className="hover:bg-gray-700 px-3 py-2 rounded-md"
+                      >
                         High
                       </SelectItem>
-                      <SelectItem value="Medium" className="hover:bg-gray-700">
+                      <SelectItem
+                        value="Medium"
+                        className="hover:bg-gray-700 px-3 py-2 rounded-md"
+                      >
                         Medium
                       </SelectItem>
-                      <SelectItem value="Low" className="hover:bg-gray-700">
+                      <SelectItem
+                        value="Low"
+                        className="hover:bg-gray-700 px-3 py-2 rounded-md"
+                      >
                         Low
                       </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-3">
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea
+
+                {/* Description Field */}
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="description"
+                    className="text-sm font-medium text-gray-300"
+                  >
+                    Description
+                  </Label>
+                  <textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) =>
@@ -189,25 +221,29 @@ const CreateQuote = () => {
                     placeholder="Describe your issue or request"
                     required
                     rows={6}
-                    className="bg-gray-800 text-white placeholder-gray-500 border-gray-700 focus:border-emerald-500 focus:ring-emerald-500 resize-y min-h-[120px] whitespace-pre-wrap"
+                    className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 focus:border-emerald-500 focus:ring-emerald-500 resize-y min-h-[120px] p-3 rounded-lg whitespace-pre-line break-words"
                   />
                 </div>
+
+                {/* Error Message */}
                 {error && (
                   <p className="text-red-500 text-sm text-center">{error}</p>
                 )}
-                <div className="pt-4 flex justify-end gap-3">
+
+                {/* Buttons */}
+                <div className="pt-6 flex justify-end gap-3">
                   <Button
                     type="button"
                     variant="outline"
                     onClick={() => setIsOpen(false)}
-                    className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                    className="border border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg px-4"
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md rounded-lg px-6"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Quote"}
                   </Button>

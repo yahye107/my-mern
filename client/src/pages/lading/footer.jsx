@@ -35,8 +35,8 @@ const Footer = () => {
               NextCRM
             </motion.h3>
             <p className="text-zinc-400 mb-6 max-w-sm">
-              Revolutionizing customer relationship management through
-              AI-powered solutions and intuitive workflows.
+              Revolutionizing customer relationship management solutions and
+              intuitive workflows.
             </p>
 
             {/* Newsletter Form */}
@@ -101,7 +101,7 @@ const Footer = () => {
                   href="mailto:support@nextcrm.com"
                   className="text-zinc-400 hover:text-blue-400 transition-colors duration-200 cursor-pointer hover:underline"
                 >
-                  support@nextcrm.com
+                  josko12211@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2 group">
@@ -110,7 +110,7 @@ const Footer = () => {
                   href="tel:+15551234567"
                   className="text-zinc-400 hover:text-blue-400 transition-colors duration-200 cursor-pointer hover:underline"
                 >
-                  +1 (555) 123-4567
+                  +252 612342355
                 </a>
               </li>
               <li className="flex items-center gap-2 group">
@@ -121,7 +121,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-zinc-400 hover:text-blue-400 transition-colors duration-200 cursor-pointer hover:underline"
                 >
-                  San Francisco, CA
+                  moqisho, dabka
                 </a>
               </li>
             </ul>

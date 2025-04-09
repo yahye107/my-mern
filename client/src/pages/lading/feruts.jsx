@@ -39,32 +39,31 @@ const Features = () => {
         >
           Our Features
         </motion.h1>
-
-        <div className="flex flex-col md:flex-row items-center gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Left Image */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="md:w-1/2 relative"
+            className="w-full lg:w-1/2 relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl transform rotate-1 shadow-2xl opacity-10 dark:opacity-20" />
             <img
               src="images/custmor.jpg"
               alt="Feature preview"
-              className="rounded-[2rem] shadow-2xl border-8 border-white/10 transform hover:rotate-[1deg] transition-transform duration-300"
+              className="rounded-[2rem] shadow-2xl border-8 border-white/10 transform hover:rotate-[1deg] transition-transform duration-300 w-full"
             />
           </motion.div>
 
-          {/* Right Cards - 2x2 Grid */}
+          {/* Right Cards - Responsive Grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             transition={{ staggerChildren: 0.1 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="md:w-1/2"
+            className="w-full lg:w-1/2"
           >
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
@@ -90,9 +89,7 @@ const Features = () => {
                   className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 p-6 rounded-xl shadow-sm hover:shadow-md transition-all h-full flex flex-col"
                 >
                   <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                      {/* Icon placeholder */}
-                    </div>
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0" />
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                       {feature.title}
                     </h3>
@@ -110,6 +107,7 @@ const Features = () => {
             </div>
           </motion.div>
         </div>
+        >
       </div>
     </section>
   );
