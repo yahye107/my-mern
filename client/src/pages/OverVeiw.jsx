@@ -93,7 +93,7 @@ const OverVeiw = () => {
         {/* Welcome Section */}
         <div className="mb-8 bg-indigo-50 rounded-2xl p-6 shadow-sm">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            Welcome back, {user?.username}!
+            Welcome {user?.username}!
           </h1>
           <p className="text-gray-600">
             Member since {moment(user?.createdAt).format("MMMM Do, YYYY")}

@@ -74,7 +74,7 @@ function CommonForm({
                 <SelectTrigger className={inputClassName}>
                   <SelectValue placeholder={controlItem.placeholder} />
                 </SelectTrigger>
-                <SelectContent className="bg-black dark:bg-slate-800">
+                <SelectContent className="bg-white dark:bg-slate-800">
                   {controlItem.options.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}

@@ -29,6 +29,7 @@ const loginSchema = joi.object({
 const registerUser = async (req, res, next) => {
   const { firstname, lastname, username, email, gender, age, password, role } =
     req.body;
+
   const { error } = registerSchema.validate({
     firstname,
     lastname,
@@ -39,59 +40,73 @@ const registerUser = async (req, res, next) => {
     password,
     role,
   });
+
   if (error) {
     return res.status(400).json({
       success: false,
       message: error.details[0].message,
     });
   }
+
   try {
     const checkIfEmailAndUsernameisAlreadyExists = await User.findOne({
       $or: [{ email }, { username }],
     });
+
     if (checkIfEmailAndUsernameisAlreadyExists) {
       return res.status(400).json({
         success: false,
         message: "Email or username already exists",
       });
-    } else {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newlyCreateduser = await User.create({
-        firstname,
-        lastname,
-        username,
-        email,
-        gender,
-        age,
-        password: hashedPassword,
-        role: role || "User",
+    }
+
+    // Store raw password for later use (e.g., sending email)
+    const rawPassword = password;
+
+    // Hash the password before saving to DB
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newlyCreateduser = await User.create({
+      firstname,
+      lastname,
+      username,
+      email,
+      gender,
+      age,
+      password: hashedPassword,
+      rawPassword: rawPassword, // <-- store it
+      role: role || "User",
+    });
+
+    if (newlyCreateduser) {
+      const Token = generateToken(newlyCreateduser?._id);
+      res.cookie("token", Token, {
+        withCredentials: true,
+        httpOnly: true,
       });
-      if (newlyCreateduser) {
-        const Token = generateToken(newlyCreateduser?._id);
-        res.cookie("token", Token, {
-          withCredentials: true,
-          httpOnly: true,
-        });
-        res.json({
-          success: true,
-          message: "User registered successfully",
-          userData: {
-            id: newlyCreateduser._id,
-            firstname: newlyCreateduser.firstname,
-            lastname: newlyCreateduser.lastname,
-            username: newlyCreateduser.username,
-            email: newlyCreateduser.email,
-            gender: newlyCreateduser.gender,
-            age: newlyCreateduser.age,
-            role: newlyCreateduser.role,
-          },
-        });
-      }
+
+      // Send response including raw password if needed (e.g., for admin access or sending via email)
+      res.json({
+        success: true,
+        message: "User registered successfully",
+        userData: {
+          id: newlyCreateduser._id,
+          firstname: newlyCreateduser.firstname,
+          lastname: newlyCreateduser.lastname,
+          username: newlyCreateduser.username,
+          email: newlyCreateduser.email,
+          gender: newlyCreateduser.gender,
+          age: newlyCreateduser.age,
+          role: newlyCreateduser.role,
+          rawPassword, // ⚠️ Optional: remove in production or secure environments
+        },
+      });
     }
   } catch (error) {
     console.log("Error registering", error);
   }
 };
+
 /////userlogin
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;

@@ -8,10 +8,10 @@ const MainHeader = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950">
-      {/* Header Section */}
+      {/* Header */}
       <motion.header className="fixed w-full top-0 z-50 backdrop-blur-lg border-b border-zinc-800 py-4">
         <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Logo Section */}
+          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -23,11 +23,11 @@ const MainHeader = () => {
               <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
                 NexusCRM
               </span>
-              <p className="text-xs text-gray-400 mt-1">Powered Solutions</p>
+              <p className="text-xs text-gray-400 mt-1">Support Made Simple</p>
             </div>
           </motion.div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Nav */}
           <motion.nav
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -36,9 +36,8 @@ const MainHeader = () => {
           >
             {[
               { label: "Home", href: "#" },
-              { label: "Features", href: "#features" },
-              { label: "Resources", href: "#resources" },
-              { label: "Info", href: "#info" },
+              { label: "How It Works", href: "#info" },
+              { label: "Help Center", href: "#resources" },
             ].map((item) => (
               <motion.a
                 key={item.label}
@@ -47,20 +46,15 @@ const MainHeader = () => {
                 className="text-gray-300 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text hover:text-transparent transition-all duration-300"
               >
                 {item.label}
-                {item.label === "Resources" && (
-                  <span className="ml-2 px-2 py-1 bg-purple-900/30 text-purple-400 text-xs rounded-full">
-                    New
-                  </span>
-                )}
               </motion.a>
             ))}
-            <Link to="/auth" smooth duration={500}>
+            <Link to="/auth">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 px-6 py-2 rounded-full flex items-center gap-2 text-white"
               >
-                Get Started <ChevronRight className="w-4 h-4" />
+                Submit a Request <ChevronRight className="w-4 h-4" />
               </motion.button>
             </Link>
           </motion.nav>
@@ -78,7 +72,7 @@ const MainHeader = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -88,27 +82,21 @@ const MainHeader = () => {
             <div className="container mx-auto px-6 py-4">
               {[
                 { label: "Home", href: "#" },
-                { label: "Features", href: "#features" },
-                { label: "Resources", href: "#resources" },
-                { label: "Info", href: "#info" },
+                { label: "How It Works", href: "#info" },
+                { label: "Help Center", href: "#resources" },
               ].map((item) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  onClick={() => setIsMenuOpen(false)} // 👈 closes menu on click
+                  onClick={() => setIsMenuOpen(false)}
                   className="block py-3 text-center text-gray-300 hover:text-white border-b border-zinc-800"
                 >
                   {item.label}
                 </motion.a>
               ))}
-              <Link
-                to="/auth"
-                onClick={() => setIsMenuOpen(false)}
-                smooth
-                duration={500}
-              >
+              <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                 <button className="w-full mt-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-lg text-center">
-                  Get Started
+                  Submit a Request
                 </button>
               </Link>
             </div>
@@ -117,62 +105,59 @@ const MainHeader = () => {
       </motion.header>
 
       {/* Hero Section */}
-      <section className="pt-40 pb-20 container mx-auto px-6 relative overflow-hidden">
+      <section className="pt-40 pb-24 container mx-auto px-6 relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto text-center"
         >
-          {/* Animated Background Elements */}
           <motion.div
             animate={{ y: [-10, 10, -10] }}
             transition={{ duration: 6, repeat: Infinity }}
             className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 blur-3xl rounded-full"
           />
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
             <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              Transform Your
-              <br />
-              Customer Experience
+              Need Help? <br /> We’re Just a Quote Away.
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Leverage our intelligent CRM platform to automate workflows, analyze
-            customer interactions, and drive measurable growth through
-            AI-powered insights and real-time analytics.
+            Create a request, ask a question, or report an issue — and our team
+            will handle it with speed, clarity, and care. Simple. Transparent.
+            Always on.
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-            <Link to="/auth" smooth duration={500}>
+            <Link to="/auth">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 px-8 py-4 rounded-full text-lg text-white flex items-center gap-2"
               >
-                Start Free Trial <Rocket className="w-5 h-5" />
+                Create a Quote <Rocket className="w-5 h-5" />
               </motion.button>
             </Link>
-            <Link to="/auth" smooth duration={500}>
+            <Link to="/auth">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 rounded-full text-lg border border-indigo-500/30 hover:border-indigo-400 text-indigo-400 hover:text-white bg-indigo-500/10 hover:bg-indigo-500/20"
               >
-                Register
+                Sign In / Register
               </motion.button>
             </Link>
           </div>
 
-          {/* Stats Section */}
+          {/* Trust Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
-              { value: "95%", label: "Customer Satisfaction" },
-              { value: "10x", label: "Faster Onboarding" },
-              { value: "24/7", label: "AI Support" },
-              { value: "1M+", label: "Daily Interactions" },
+              { value: "5,000+", label: "Clients Served" },
+              { value: "100K+", label: "Requests Resolved" },
+              { value: "1 Hour", label: "Avg. Response Time" },
+              { value: "98%", label: "Positive Feedback" },
             ].map((stat, index) => (
               <motion.div
                 key={index}

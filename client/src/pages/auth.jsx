@@ -2,6 +2,7 @@ import Login from "@/components/auth/Login";
 import Register from "@/components/auth/Register";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Rocket } from "lucide-react";
 
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
@@ -21,19 +22,26 @@ const AuthPage = () => {
 
         <div className="z-10">
           <div className="mb-16">
-            <img
-              // src="/images/"  logo-white.png
-              src="/images/client.jpg"
-              alt="Company Logo"
-              width={160}
-              height={48}
-              className="mb-8"
-            />
+            <div className="flex items-center gap-3">
+              <Rocket className="w-8 h-8 text-indigo-400" />
+              <div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                  NexusCRM
+                </span>
+                <p className="text-xs text-gray-400 mt-1">
+                  Quote Management Platform
+                </p>
+              </div>
+            </div>
           </div>
 
           <h2 className="text-4xl font-bold text-white mb-6">
-            Transform Your Business
+            Transform Quotes into Revenue
           </h2>
+          <p className="text-blue-200 mb-10 max-w-lg">
+            The complete solution to create, track, and convert customer quotes
+            while building stronger relationships.
+          </p>
 
           <div className="space-y-8">
             <div className="flex items-start space-x-4">
@@ -41,8 +49,35 @@ const AuthPage = () => {
                 <svg
                   className="w-6 h-6 text-blue-400"
                   fill="none"
-                  stroke="currentColor"
                   viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-white">
+                  Professional Quote Creation
+                </h3>
+                <p className="text-blue-200">
+                  Create polished, branded quotes in minutes with customizable
+                  templates
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-4">
+              <div className="bg-blue-600/20 p-2 rounded-lg">
+                <svg
+                  className="w-6 h-6 text-blue-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
                   <path
                     strokeLinecap="round"
@@ -54,10 +89,10 @@ const AuthPage = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white">
-                  Advanced Analytics
+                  Real-time Quote Tracking
                 </h3>
                 <p className="text-blue-200">
-                  Real-time insights and data visualization for informed
+                  See when clients view your quotes and get notified about
                   decisions
                 </p>
               </div>
@@ -68,34 +103,8 @@ const AuthPage = () => {
                 <svg
                   className="w-6 h-6 text-blue-400"
                   fill="none"
-                  stroke="currentColor"
                   viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white">
-                  Workflow Automation
-                </h3>
-                <p className="text-blue-200">
-                  Streamline processes with intelligent automation tools
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-4">
-              <div className="bg-blue-600/20 p-2 rounded-lg">
-                <svg
-                  className="w-6 h-6 text-blue-400"
-                  fill="none"
                   stroke="currentColor"
-                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"
@@ -107,21 +116,62 @@ const AuthPage = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white">
-                  Team Collaboration
+                  Client Relationship Hub
                 </h3>
                 <p className="text-blue-200">
-                  Seamless communication and task management
+                  Maintain complete client history with notes, interactions, and
+                  documents
                 </p>
               </div>
+            </div>
+
+            <div className="flex items-start space-x-4">
+              {/* <div className="bg-blue-600/20 p-2 rounded-lg">
+                <svg
+                  className="w-6 h-6 text-blue-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  />
+                </svg>
+              </div> */}
+              {/* <div>
+                <h3 className="text-lg font-semibold text-white">
+                  Sales Pipeline Management
+                </h3>
+                <p className="text-blue-200">
+                  Visualize your sales process from quote to close
+                </p>
+              </div> */}
             </div>
           </div>
         </div>
 
         {/* Footer */}
         <div className="z-10 border-t border-blue-800/30 pt-8">
-          <p className="text-blue-300/80 text-sm">
-            Trusted by 5000+ businesses worldwide
-          </p>
+          <div className="flex items-center space-x-4">
+            <div className="flex -space-x-2">
+              {[1, 2, 3].map((item) => (
+                <img
+                  key={item}
+                  src={`https://randomuser.me/api/portraits/men/${
+                    item + 40
+                  }.jpg`}
+                  alt="User"
+                  className="w-8 h-8 rounded-full border-2 border-blue-900"
+                />
+              ))}
+            </div>
+            <p className="text-blue-300/80 text-sm">
+              Trusted by 5,000+ clients to solve issues quickly
+            </p>
+          </div>
         </div>
       </div>
 
@@ -184,14 +234,14 @@ const AuthPage = () => {
             >
               {isLoginView ? (
                 <>
-                  Don't have an account?{" "}
+                  New here?
                   <span className="ml-1 font-medium text-blue-600">
-                    Start free trial
+                    Create an account
                   </span>
                 </>
               ) : (
                 <>
-                  Already registered?{" "}
+                  Already have an account?
                   <span className="ml-1 font-medium text-blue-600">
                     Sign in here
                   </span>

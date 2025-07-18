@@ -8,14 +8,18 @@ import FAQ from "./lading/Faq";
 import BlogResources from "./lading/blog";
 import LFooter from "./lading/footer";
 import Features from "./lading/feruts";
+import AboutUs from "./lading/AboutUS";
+import OurInfo from "./lading/OurInfo";
 
 const Mainpage = () => {
   return (
     <div>
       <MainHeader />
+      <AboutUs />
       <Visitros />
+      <OurInfo />
       <Features />
-      <Crmrocks />
+      {/* <Crmrocks /> */}
       <Testimonials />
       <CallToAction />
       <FAQ />
