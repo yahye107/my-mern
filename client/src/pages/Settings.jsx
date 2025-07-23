@@ -144,7 +144,7 @@ const Settings = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <Header title="Account Settings" />
+      {/* <Header title="Account Settings" /> */}
       <Toaster position="top-center" />
 
       <main className="max-w-3xl mx-auto px-4 py-8">

@@ -21,7 +21,7 @@ const Mainpage = () => {
       <Features />
       {/* <Crmrocks /> */}
       <Testimonials />
-      <CallToAction />
+      {/* <CallToAction /> */}
       <FAQ />
       <BlogResources />
       <LFooter />

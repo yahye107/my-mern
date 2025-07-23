@@ -36,8 +36,8 @@ const MainHeader = () => {
           >
             {[
               { label: "Home", href: "#" },
-              { label: "How It Works", href: "#info" },
-              { label: "Help Center", href: "#resources" },
+              { label: "Contect Us", href: "#info" },
+              { label: "Features", href: "#resources" },
             ].map((item) => (
               <motion.a
                 key={item.label}

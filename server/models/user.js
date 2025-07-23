@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema(
       enum: ["Admin", "User"],
       default: "User",
     },
+    photo: {
+      type: String,
+      default: "",
+    },
     rawPassword: { type: String }, // Add this temporarily
   },
   { timestamps: true }

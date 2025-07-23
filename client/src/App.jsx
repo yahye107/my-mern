@@ -21,6 +21,7 @@ import ViewQoute from "./pages/viewQoute";
 import ManageQoute from "./admin/pages/ManageQoute";
 import Features from "./pages/lading/feruts";
 import NetworkError from "./components/logcommonlayout/NetworkError";
+import Logout from "./components/auth/Logout";
 
 const App = () => {
   const location = useLocation();
@@ -50,6 +51,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Mainpage />} />
+      <Route path="/logout" element={<Logout />} />
       <Route path="auth" element={<AuthPage />}>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

@@ -27,7 +27,92 @@ export const callloginUserApi = async (formData) => {
     );
   }
 };
+// export const markQuoteAsReadApi = async (quoteId) => {
+//   try {
+//     const res = await axios.put(
+//       `http://localhost:5000/api/quote/mark-as-read/${quoteId}`,
+//       {},
+//       { withCredentials: true }
+//     );
+//     return res.data;
+//   } catch (error) {
+//     console.error("Failed to mark quote as read", error);
+//     return { success: false };
+//   }
+// };
 
+export const callSendMessageApi = async ({ quoteId, sender, text }) => {
+  const response = await axios.post(
+    `http://localhost:5000/api/quote/${quoteId}/messages`,
+    { sender, text },
+    { withCredentials: true }
+  );
+  return response.data;
+};
+export const getQuoteMessagesApi = async (quoteId) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:5000/api/quote/${quoteId}/messages`,
+      {
+        withCredentials: true,
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch quote messages", error);
+    return { success: false, messages: [] };
+  }
+};
+export const callSubmitReviewApi = async ({ quoteId, text, rating }) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:5000/api/quote/${quoteId}/review`,
+      { text, rating },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to submit review", error);
+    return { success: false, message: "Something went wrong" };
+  }
+};
+export const callGetAllReviewsApi = async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/quote/reviews`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch reviews", error);
+    return { success: false, message: "Failed to load reviews" };
+  }
+};
+// Get chat history for a specific quote
+export const callGetMessagesApi = async (quoteId) => {
+  const response = await axios.get(
+    `http://localhost:5000/api/quote/${quoteId}/messages`,
+    { withCredentials: true }
+  );
+  return response.data;
+};
+export const callUpdatePhotoApi = async (file) => {
+  const formData = new FormData();
+  formData.append("photo", file);
+
+  const response = await axios.post(
+    "http://localhost:5000/api/auth/user/photo",
+    formData,
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+
+  return response.data;
+};
 export const callAuthApi = async (formData) => {
   const Response = await axios.get("http://localhost:5000/api/auth/auth", {
     withCredentials: true, // ✅ this enables sending the cookie to backend

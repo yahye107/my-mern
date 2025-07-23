@@ -1,20 +1,18 @@
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import {
   BarChart2,
-  Menu,
-  Settings,
-  ShoppingBag,
-  ShoppingCart,
-  TrendingUp,
-  LogOut,
   User,
   PlusCircle,
   Eye,
   Cog,
+  LogOut,
+  ChevronLeft,
+  Menu,
+  X,
 } from "lucide-react";
-import { useState, useContext } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 
 import { useUser } from "@/context/use_context";
 import { calllogoutUserApi } from "@/service";
@@ -23,150 +21,178 @@ const SIDEBAR_ITEMS = [
   {
     name: "Dashboard",
     icon: BarChart2,
-    color: "#6366f1",
     href: "/userdash",
+    color: "#6366f1",
   },
   {
     name: "Profile",
-    icon: User, // Icon for user profile
-    color: "#8B5CF6",
+    icon: User,
     href: "/userdash/profile",
+    color: "#8B5CF6",
   },
   {
     name: "Create Quote",
-    icon: PlusCircle, // Icon for creating a new quote
-    color: "#F59E0B",
+    icon: PlusCircle,
     href: "/userdash/create",
+    color: "#F59E0B",
   },
   {
-    name: "View Quote",
-    icon: Eye, // Icon for viewing the quotes
-    color: "#3B82F6",
+    name: "View Quotes",
+    icon: Eye,
     href: "/userdash/veiw",
+    color: "#3B82F6",
   },
   {
     name: "Settings",
-    icon: Cog, // Icon for settings
-    color: "#3B82F6",
+    icon: Cog,
     href: "/userdash/settings",
+    color: "#10B981",
+  },
+  {
+    name: "Logout",
+    icon: LogOut,
+    href: "/logout",
+    color: "#EF4444", // red-500
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ onItemClick }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const navigate = useNavigate();
-
   const { user, setUser } = useUser();
-  const handleLogout = async () => {
-    try {
-      const response = await calllogoutUserApi();
-      if (response.success) {
-        toast.success("User logged out successfully!");
-        setUser(null);
-        localStorage.removeItem("role");
-        navigate("/");
-      }
-    } catch (error) {
-      toast.error("An error occurred while logging out.");
-    }
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await calllogoutUserApi();
+  //     if (response.success) {
+  //       setUser(null);
+  //       navigate("/auth");
+  //       toast.success("Logged out successfully!");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Logout failed. Please try again.");
+  //   }
+  // };
 
   return (
     <motion.div
-      className={`relative z-10 flex-shrink-0 ${
-        isSidebarOpen ? "w-64" : "w-20"
-      }`}
-      animate={{ width: isSidebarOpen ? 256 : 80 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
+      initial={{ width: isSidebarOpen ? 240 : 80 }}
+      animate={{ width: isSidebarOpen ? 240 : 80 }}
+      className={`relative h-full bg-white text-gray-800 flex flex-col border-r border-gray-200 shadow-sm transition-all duration-300`}
     >
-      <div className="h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-gray-700">
-        {/* Menu Button */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 rounded-full hover:bg-gray-700 transition-colors mb-6"
-        >
-          <Menu size={24} className="text-gray-200" />
-        </motion.button>
+      {/* Header */}
+      <div className="p-4 flex items-center justify-between border-b border-gray-100">
+        <AnimatePresence>
+          {isSidebarOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              className="flex items-center gap-2"
+            >
+              <div className="bg-indigo-500 w-8 h-8 rounded-md flex items-center justify-center">
+                <span className="font-bold text-white text-lg">C</span>
+              </div>
+              <h1 className="text-xl font-bold text-indigo-600">CRM</h1>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* User Profile Section */}
-        <div className="flex items-center gap-3 mb-8 px-2">
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          {isSidebarOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* User Profile */}
+      <div className="p-4 flex items-center gap-3 border-b border-gray-100">
+        <div className="relative">
           <img
-            src="/images/client.jpg"
-            alt="User profile"
-            className="w-12 h-12 rounded-full object-cover border-2 border-emerald-500"
+            src={user?.photo || "/images/client.jpg"}
+            alt="User"
+            className="w-10 h-10 rounded-full object-cover border-2 border-white shadow"
           />
-          <AnimatePresence>
-            {isSidebarOpen && (
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                className="min-w-0"
-              >
-                <h3 className="text-gray-100 font-medium truncate">
-                  {user?.username}
-                </h3>
-                <p className="text-gray-400 text-sm truncate">
-                  {user?.email || "admin@gmail.com"}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
         </div>
 
-        {/* Navigation Items */}
-        <nav className="flex-grow">
-          {SIDEBAR_ITEMS.map((item) => (
-            <Link key={item.href} to={item.href}>
-              <motion.div
-                className="flex items-center p-3 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2"
-                whileHover={{ scale: 1.02 }}
-              >
-                <item.icon
-                  size={20}
-                  className="flex-shrink-0"
-                  style={{ color: item.color }}
-                />
-                <AnimatePresence>
-                  {isSidebarOpen && (
-                    <motion.span
-                      className="ml-3 whitespace-nowrap"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                    >
-                      {item.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </Link>
-          ))}
+        <AnimatePresence>
+          {isSidebarOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              className="overflow-hidden"
+            >
+              <h3 className="font-semibold text-gray-900 truncate">
+                {user?.username || "Guest User"}
+              </h3>
+              <p className="text-xs text-gray-500 truncate">
+                {user?.email || "user@example.com"}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-          {/* Logout Button */}
-          <motion.div
-            onClick={handleLogout}
-            className="flex items-center p-3 text-sm font-medium rounded-lg hover:bg-red-600/30 transition-colors mt-4 cursor-pointer"
+      {/* Navigation */}
+      <div className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
+        {SIDEBAR_ITEMS.map((item, index) => (
+          <motion.button
+            key={index}
             whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => {
+              navigate(item.href);
+              onItemClick?.();
+            }}
+            className={`w-full flex items-center p-3 rounded-lg transition-all ${
+              location.pathname === item.href
+                ? "bg-indigo-50 border-l-4 border-indigo-500"
+                : "hover:bg-gray-50"
+            }`}
           >
-            <LogOut size={20} className="text-red-400 flex-shrink-0" />
+            <item.icon
+              size={20}
+              style={{ color: item.color }}
+              className="flex-shrink-0"
+            />
             <AnimatePresence>
               {isSidebarOpen && (
                 <motion.span
-                  className="ml-3 whitespace-nowrap"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -10 }}
+                  className="ml-3 text-sm font-medium"
                 >
-                  Logout
+                  {item.name}
                 </motion.span>
               )}
             </AnimatePresence>
-          </motion.div>
-        </nav>
+          </motion.button>
+        ))}
       </div>
+
+      {/* Footer logout (always sticks at bottom) */}
+      {/* <div className="p-3 border-t border-gray-100">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center p-3 rounded-lg hover:bg-red-50 transition-colors text-red-600"
+        >
+          <LogOut size={20} />
+          {isSidebarOpen && <span className="ml-3 font-medium">Logout</span>}
+        </button>
+      </div> */}
+
+      {/* Close button for mobile */}
+      <button
+        onClick={onItemClick}
+        className="absolute top-3 right-3 md:hidden p-1.5 rounded-full bg-gray-100 hover:bg-gray-200"
+      >
+        <X size={18} />
+      </button>
     </motion.div>
   );
 };

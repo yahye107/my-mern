@@ -69,7 +69,7 @@ const OverVeiw = () => {
   if (loading) {
     return (
       <div className="flex-1 overflow-auto relative z-10">
-        <Header title="User Overview" />
+        {/* <Header title="User Overview" /> */}
         <div className="max-w-7xl mx-auto py-6 px-4 lg:px-8">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
             {[...Array(4)].map((_, i) => (
@@ -88,7 +88,7 @@ const OverVeiw = () => {
 
   return (
     <div className="flex-1 overflow-auto relative z-10">
-      <Header title="User Overview" />
+      {/* <Header title="User Overview" /> */}
       <main className="max-w-7xl mx-auto py-6 px-4 lg:px-8">
         {/* Welcome Section */}
         <div className="mb-8 bg-indigo-50 rounded-2xl p-6 shadow-sm">

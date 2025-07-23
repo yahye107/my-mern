@@ -14,7 +14,15 @@ const {
 } = require("../controlls/auth_controller");
 
 const { authVarfication } = require("../middle_ware/auth_middle");
+const upload = require("../middle_ware/upload");
+const { updateProfilePhoto } = require("../controlls/userControll");
 
+routes.post(
+  "/user/photo",
+  authVarfication,
+  upload.single("photo"),
+  updateProfilePhoto
+);
 routes.post("/register", registerUser);
 routes.post("/login", loginUser);
 routes.get("/auth", authVarfication, (req, res) => {
